@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
@@ -9,7 +10,12 @@ export default function Home() {
     message: "",
   });
 
-  const sendButtonHandler = () => {
+  const sendButtonHandler = async () => {
+    try {
+      await axios.post("/api/mailto", data);
+    } catch (error) {
+      console.log(error);
+    }
     setData({
       email: "",
       subject: "",
