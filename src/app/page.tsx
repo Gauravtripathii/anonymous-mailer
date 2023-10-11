@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [data, setData] = useState({
@@ -13,8 +14,9 @@ export default function Home() {
   const sendButtonHandler = async () => {
     try {
       await axios.post("/api/mailto", data);
-    } catch (error) {
-      console.log(error);
+      toast.success("Email sent successfully!");
+    } catch (error: any) {
+      toast.error(error.message);
     }
     setData({
       email: "",
